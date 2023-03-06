@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useForm } from '@inertiajs/react';
 import Header from '@/Components/Header';
+import Create from '@/Components/Create';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
@@ -64,21 +65,19 @@ export default function Study({auth,studies}) {
             
             {/*New Survey Record Creation Screen*/}
             <div id='create' className='hidden'>
-                <h1 className="text-xl font-bold mt-6">StudyTitle</h1>
-                <TextField onChange={(e) => sTitle(e)}/>
-                
-                <h1 className="text-xl font-bold mt-6">Overview</h1>
-                <TextField fullWidth onChange={(e) => sOverview(e)}/>
-                
-                <h1 className="text-xl font-bold mt-6">Password</h1>
-                <TextField onChange={(e) => sPass(e)}/>
-            
+                <Create  
+                first={'first'} 
+                second={'second'} 
+                third={'third'} 
+                firstPost={(e) => sTitle(e)}
+                secondPost={(e) => sOverview(e)}
+                thirdPost={(e) => sPass(e)}
+                ></Create>
                 <Button variant="outliend" onClick={() => setShow()}>BACK</Button>
                 <Button variant="contained" onClick={() => submit()}
                     className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                 >SAVE</Button>
             </div>
-        
         
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">

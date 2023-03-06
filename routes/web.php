@@ -17,11 +17,11 @@ use App\Http\Controllers\StudyController;
 |
 */
 
-/*Route::get('/', function(){
-    return Inertia::render('Study');
-});*/
+Route::get('/', function(){
+    return Inertia::render('Record');
+});
 
-Route::get('/', [StudyController::class,"study"]);
+//Route::get('/', [StudyController::class,"study"]);
 Route::post('/create', [StudyController::class,'create']);
 
 /*
