@@ -2,10 +2,11 @@ import React, { useState,useCallback } from 'react';
 import { useForm } from '@inertiajs/react';
 import Header from '@/Components/Header';
 import Create from '@/Components/Create';
+import Tables from '@/Components/Tables';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function Record() {
+export default function Record({datas, researches}) {
 
     const { data, setData, post } = useForm({
         aim:'',
@@ -15,9 +16,12 @@ export default function Record() {
         memo:'',
         title: '',
         overview:'',
-        pass: '',
+        link: '',
+        check:'',
     });
     
+    var record = false;
+    var imput = false;
     
     //Switching the display of the choose screen
     let create = false;
@@ -32,57 +36,28 @@ export default function Record() {
     };
     
     //Switching the display of the record screen
-    let record = false;
-    let input = false;
     const recordEx = () =>{
         if (record == false){
             document.getElementById('experiment') . style . display = "block";
             record = true;
             document.getElementById('research') . style . display = "none";
-            input = false;
+            imput = false;
         }else{
             document.getElementById('experiment') . style . display = "none";
             record = false;
         }
     };
     const memory = () =>{
-        if (input == false){
+        if (imput == false){
             document.getElementById('research') . style . display = "block";
-            input = true;
+            imput = true;
             document.getElementById('experiment') . style . display = "none";
             record = false;
         }else{
             document.getElementById('research') . style . display = "none";
-            input = false;
+            imput = false;
         }
     };
-    
-    
-    //Getting input values
-    const sAim = useCallback((e, value) =>{
-        setData('aim', e.target.value);
-    });
-    const sMethod = useCallback((e, value) =>{
-        setData('method', e.target.value);
-    });
-    const sTools = useCallback((e, value) =>{
-        setData('tool', e.target.value);
-    });
-    const sResult = useCallback((e, value) =>{
-        setData('result', e.target.value);
-    });
-    const sMemo = useCallback((e, value) =>{
-        setData('memo', e.target.value);
-    });
-    const sTitle = useCallback((e, value) =>{
-        setData('title', e.target.value);
-    });
-    const sBody = useCallback((e, value) =>{
-        setData('body', e.target.value);
-    });
-    const sLink = useCallback((e, value) =>{
-        setData('link', e.target.value);
-    });
     
     
     //post
@@ -90,13 +65,39 @@ export default function Record() {
         post('/record');
     };
     
+    //Getting input values
+    const sAim = useCallback((e) =>{
+        setData('aim', e.target.value);
+    });
+    const sMethod = useCallback((e) =>{
+        setData('method', e.target.value);
+    });
+    const sTools = useCallback((e) =>{
+        setData('tool', e.target.value);
+    });
+    const sResult = useCallback((e) =>{
+        setData('result', e.target.value);
+    });
+    const sMemo = useCallback((e) =>{
+        setData('memo', e.target.value);
+    });
+    const sTitle = useCallback((e) =>{
+        setData('title', e.target.value);
+    });
+    const sBody = useCallback((e) =>{
+        setData('body', e.target.value);
+    });
+    const sLink = useCallback((e) =>{
+        setData('link', e.target.value);
+    });
+    
     return(
         <>
             <Header>Record</Header> 
             
             <Button variant="contained" onClick={() => setShow()} 
                 className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >NEW</Button>
+            >NEW RECORD</Button>
             
             {/*Choose Screen*/}
             <div id='create' className='hidden'>
@@ -145,6 +146,11 @@ export default function Record() {
                     className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                 >SAVE</Button>
             </div>
+            
+            <Tables Title='Experiment/Survey Record' Category='Category' num={datas}></Tables>
+            
+            <Tables Title='Research Record' Category='Category' num={researches}></Tables>
+            
         </>
         );
 }

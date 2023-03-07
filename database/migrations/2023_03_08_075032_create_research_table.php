@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('body');
             $table->text('link');
-            $table->foreignID('study_id')->constrained('studies')->onDlete('cascade');
-            $table->foreignID('category_id')->constrained('categories')->nullable();
-            $table->foreignID('user_id')->constrained('users')->onDlete('cascade')->nullable();
+            //$table->foreignID('study_id')->constrained('studies')->onDlete('cascade');
+            //$table->foreignID('category_id')->constrained('categories')->nullable();
+            //$table->foreignID('user_id')->constrained('users')->onDlete('cascade')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

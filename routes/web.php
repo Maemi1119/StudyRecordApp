@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\StudyController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,13 @@ use App\Http\Controllers\StudyController;
 |
 */
 
-Route::get('/', function(){
+/*Route::get('/', function(){
     return Inertia::render('Record');
-});
+});*/
+
+Route::get('/', [DataController::class,"openrecord"]);
+Route::post('/record', [DataController::class,'record']);
+
 
 //Route::get('/', [StudyController::class,"study"]);
 Route::post('/create', [StudyController::class,'create']);
