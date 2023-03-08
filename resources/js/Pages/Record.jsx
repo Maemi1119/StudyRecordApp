@@ -151,6 +151,9 @@ export default function Record({ study, datas, researches }) {
             
             <Tables Title='Research Record' Category='Category' num={researches} link={'/research/'}></Tables>
             
+            <Button variant="outlined" size='small' href={'/'}
+            >BACK</Button>
+            
         </>
         );
 }

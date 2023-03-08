@@ -17,6 +17,9 @@ export default function Experiment({researches}) {
             
             <h1 className="text-xl font-bold mt-6">Tools</h1>
             <p>{researches.link}</p>
+            
+            <Button variant="outlined" size='small' href={'/open/' + researches.study_id}
+            >BACK</Button>
         </>
         );
 }
