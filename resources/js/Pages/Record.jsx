@@ -6,7 +6,7 @@ import Tables from '@/Components/Tables';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function Record({datas, researches}) {
+export default function Record({ study, datas, researches }) {
 
     const { data, setData, post } = useForm({
         aim:'',
@@ -62,7 +62,7 @@ export default function Record({datas, researches}) {
     
     //post
     const submit = () =>{
-        post('/record');
+        post(`/record/${study.id}`);
     };
     
     //Getting input values
@@ -147,9 +147,9 @@ export default function Record({datas, researches}) {
                 >SAVE</Button>
             </div>
             
-            <Tables Title='Experiment/Survey Record' Category='Category' num={datas}></Tables>
+            <Tables Title='Experiment/Survey Record' Category='Category' num={datas} link={'/data/'}></Tables>
             
-            <Tables Title='Research Record' Category='Category' num={researches}></Tables>
+            <Tables Title='Research Record' Category='Category' num={researches} link={'/research/'}></Tables>
             
         </>
         );

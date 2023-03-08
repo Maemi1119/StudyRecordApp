@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-export default function Record({id,first,second,third,fourth,fifth,firstPost,secondPost,thirdPost,fourthPost,fifthPost,number}) {
+export default function Create({id,first,second,third,fourth,fifth,firstPost,secondPost,thirdPost,fourthPost,fifthPost,number}) {
     
     return(
         <>

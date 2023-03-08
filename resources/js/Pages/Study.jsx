@@ -67,9 +67,9 @@ export default function Study({auth,studies}) {
             {/*New Survey Record Creation Screen*/}
             <div id='create' className='hidden'>
                 <Create  
-                first={'first'} 
-                second={'second'} 
-                third={'third'} 
+                first={'Title'} 
+                second={'Overview'} 
+                third={'pass'} 
                 firstPost={(e) => sTitle(e)}
                 secondPost={(e) => sOverview(e)}
                 thirdPost={(e) => sPass(e)}
@@ -81,7 +81,7 @@ export default function Study({auth,studies}) {
             </div>
             
             {/*Study List*/}
-            <Tables Title='StudyTitle' num={studies}></Tables>
+            <Tables Title='StudyTitle' num={studies} link={'/open/'}></Tables>
         </>
         );
 }

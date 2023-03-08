@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\ResearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,15 +20,23 @@ use App\Http\Controllers\DataController;
 */
 
 /*Route::get('/', function(){
-    return Inertia::render('Record');
+    return Inertia::render('Content');
 });*/
 
-Route::get('/', [DataController::class,"openrecord"]);
-Route::post('/record', [DataController::class,'record']);
 
 
-//Route::get('/', [StudyController::class,"study"]);
+
+
+Route::get('/', [StudyController::class,"study"]);
 Route::post('/create', [StudyController::class,'create']);
+
+Route::get('/open/{study}', [DataController::class,"openrecord"]);
+Route::post('/record/{study}', [DataController::class,'record']);
+
+Route::get('/research/{research}', [ResearchController::class,"show"]);
+Route::get('/data/{data}', [DataController::class,"show"]);
+
+
 
 /*
 Route::get('/', function () {
