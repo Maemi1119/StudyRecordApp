@@ -36,6 +36,9 @@ Route::post('/record/{study}', [DataController::class,'record']);
 Route::get('/research/{research}', [ResearchController::class,"show"]);
 Route::get('/data/{data}', [DataController::class,"show"]);
 
+Route::delete('/deletestudy/{study}', [StudyController::class,"delete"])->name('deletestudy');
+Route::delete('/deleteresearch/{research}', [ResearchController::class,"delete"])->name('deleteresearch');
+Route::delete('/deletedata/{data}', [DataController::class,"delete"])->name('deletedata');
 
 
 /*

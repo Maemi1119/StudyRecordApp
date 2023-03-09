@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
+import { useForm } from '@inertiajs/react';
 import TextField from '@mui/material/TextField';
 import Header from '@/Components/Header';
 import Button from '@mui/material/Button';
 
 export default function Experiment({datas}) {
-    console.log(datas);
+    
+    const { delete: destory } = useForm();
+    const handleDelete = (id) => {
+        if(confirm('削除すると復元できません。本当に削除しますか？')){
+            destory(route("deletedata", id), {
+                preserveScroll: true,
+            });
+        }
+    };
+
     return(
         <>
             <Header>Content</Header>
@@ -26,6 +36,8 @@ export default function Experiment({datas}) {
             
             <Button variant="outlined" size='small' href={'/open/' + datas.study_id}
             >BACK</Button>
+            <Button variant="outlined" size='small' onClick={()=>handleDelete(datas.id)}
+            >DELETE</Button>
         </>
         );
 }

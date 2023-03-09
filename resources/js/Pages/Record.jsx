@@ -20,18 +20,25 @@ export default function Record({ study, datas, researches }) {
         check:'',
     });
     
-    var record = false;
-    var imput = false;
+    let record = false;
+    let imput = false;
     
     //Switching the display of the choose screen
     let create = false;
+    const [newBtn, setNewBtn] = useState('NEW RECORD');
     const setShow = () =>{
         if (create == false){
-            document.getElementById('create') . style . display = "block";
             create = true;
+            document.getElementById('create') . style . display = "block";
+            setNewBtn('CLOSE');
         }else{
-            document.getElementById('create') . style . display = "none";
             create = false;
+            document.getElementById('create') . style . display = "none";
+            setNewBtn('NEW RECORD');
+            record = true;
+            imput = true;
+            recordEx();
+            memory();
         }
     };
     
@@ -56,6 +63,20 @@ export default function Record({ study, datas, researches }) {
         }else{
             document.getElementById('research') . style . display = "none";
             imput = false;
+        }
+    };
+    
+    let share = false;
+    const [newShare, setNewShare] = useState('Share');
+    let sharepass = () =>{
+        if (share == false){
+            share = true;
+            document.getElementById('share') . style . display = "block";
+            setNewShare('CLOSE');
+        }else{
+            share = false;
+            document.getElementById('share') . style . display = "none";
+            setNewShare('Share');
         }
     };
     
@@ -91,17 +112,41 @@ export default function Record({ study, datas, researches }) {
         setData('link', e.target.value);
     });
     
+    const { delete: destory } = useForm();
+    const handleDelete = (id) => {
+        if(confirm('削除すると復元できません。本当に削除しますか？')){
+            destory(route("deletestudy", id), {
+                preserveScroll: true,
+            });
+        }
+    };
+    
     return(
         <>
             <Header>Record</Header> 
             
+            <div className='w-4/5 my-10'>
+            <h1 className="text-xl font-bold mt-6">StudyTitle</h1>
+            <p>{study.title}</p>
+            <h1 className="text-xl font-bold mt-6">Overview</h1>
+            <p>{study.overview}</p>
+                <div id='share' className='hidden'>
+                    <h1 className="text-xl font-bold mt-6">ShareID</h1>
+                    <p>{study.id}</p>
+                    <h1 className="text-xl font-bold mt-6">Pass</h1>
+                    <p>{study.pass}</p>
+                </div>
+            <Button variant="outlined" size='small' onClick={() => sharepass()} 
+            >{newShare}</Button>
+            </div>
+            
             <Button variant="contained" onClick={() => setShow()} 
                 className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >NEW RECORD</Button>
+            >{newBtn}</Button>
             
             {/*Choose Screen*/}
-            <div id='create' className='hidden'>
-                <h1 className="text-xl font-bold mt-6">Please choose what you are about to record.</h1>
+            <div id='create' className='hidden w-4/5 my-10'>
+                <p>Please choose what you are about to record.</p>
                 <Button variant="outlined" size="large" onClick={() => recordEx()}>
                     Experiment/Survey
                 </Button>
@@ -111,7 +156,7 @@ export default function Record({ study, datas, researches }) {
             </div>
             
             {/*Experiment/Survey Record Entry Screen*/}
-            <div id='experiment' className='hidden'>
+            <div id='experiment' className='hidden w-4/5 mx-auto my-10' >
                 <Create  
                 first={'Aim'} 
                 second={'Method'} 
@@ -132,7 +177,7 @@ export default function Record({ study, datas, researches }) {
             </div>
             
             {/*Research Record Entry Screen*/}
-            <div id='research' className='hidden'>
+            <div id='research' className='hidden w-4/5 mx-auto my-10'>
                 <Create 
                 first={'Title'} 
                 second={'Body'} 
@@ -153,6 +198,8 @@ export default function Record({ study, datas, researches }) {
             
             <Button variant="outlined" size='small' href={'/'}
             >BACK</Button>
+            <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
+            >DELETE</Button>
             
         </>
         );

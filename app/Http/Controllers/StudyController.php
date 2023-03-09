@@ -13,7 +13,6 @@ class StudyController extends Controller
         //$user = Auth::id();
         return Inertia::render('Study',[
             'studies' => $study->get(),
-            //'studies' =>$study->where('user_id', $user)->get()
             ]);
     }
     
@@ -29,4 +28,8 @@ class StudyController extends Controller
         //return redirect('/open/' . $study->id);
     }
     
+    public function delete(Study $study){
+        $study->delete();
+        return redirect('/');
+    }
 }

@@ -57,4 +57,9 @@ class DataController extends Controller
             ]);
     }
     
+    public function delete(Data $data){
+        $data->delete();
+        return redirect('/open/' .  $data->study_id);
+    }
+    
 }

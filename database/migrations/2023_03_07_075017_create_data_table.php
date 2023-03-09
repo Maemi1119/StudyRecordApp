@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('tool')->nullable();
             $table->text('result');
             $table->text('memo')->nullable();
-            $table->foreignID('study_id')->constrained('studies')->onDlete('cascade');
+            $table->foreignID('study_id')->constrained('studies')->onDelete('cascade');
             //$table->foreignID('category_id')->nullable()->constrained('categories');
             //$table->foreignID('user_id')->constrained('users')->onDlete('cascade')->nullable();
             $table->timestamps();

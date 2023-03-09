@@ -14,4 +14,9 @@ class ResearchController extends Controller
             'researches' => $research
             ]);
     }
+    
+    public function delete(Research $research){
+        $research->delete();
+        return redirect('/open/' .  $research->study_id);
+    }
 }
