@@ -19,25 +19,29 @@ export default function Experiment({datas}) {
         <>
             <Header>Content</Header>
             
-            <h1 className="text-xl font-bold mt-6">Aim</h1>
-            <p>{datas.aim}</p>
-            
-            <h1 className="text-xl font-bold mt-6">Method</h1>
-            <p>{datas.method}</p>
-            
-            <h1 className="text-xl font-bold mt-6">Tools</h1>
-            <p>{datas.tool}</p>
-            
-            <h1 className="text-xl font-bold mt-6">Result</h1>
-            <p>{datas.result}</p>
-            
-            <h1 className="text-xl font-bold mt-6">memo</h1>
-            <p>{datas.memo}</p>
-            
-            <Button variant="outlined" size='small' href={'/open/' + datas.study_id}
-            >BACK</Button>
-            <Button variant="outlined" size='small' onClick={()=>handleDelete(datas.id)}
-            >DELETE</Button>
+            <div className='w-4/5 mx-auto my-10'>
+                <h1 className="text-xl font-bold mt-6">Aim</h1>
+                <p>{datas.aim}</p>
+                
+                <h1 className="text-xl font-bold mt-6">Method</h1>
+                <p>{datas.method}</p>
+                
+                <h1 className="text-xl font-bold mt-6">Tools</h1>
+                <p>{datas.tool}</p>
+                
+                <h1 className="text-xl font-bold mt-6">Result</h1>
+                <p>{datas.result}</p>
+                
+                <h1 className="text-xl font-bold mt-6">memo</h1>
+                <p>{datas.memo}</p>
+                
+                <div className="mt-10">
+                    <Button variant="outlined" size='small' href={'/open/' + datas.study_id}
+                    >BACK</Button>
+                    <Button variant="outlined" size='small' onClick={()=>handleDelete(datas.id)}
+                    >DELETE</Button>
+                </div>
+            </div>
         </>
         );
 }

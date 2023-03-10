@@ -156,7 +156,7 @@ export default function Record({ study, datas, researches }) {
             </div>
             
             {/*Experiment/Survey Record Entry Screen*/}
-            <div id='experiment' className='hidden w-4/5 mx-auto my-10' >
+            <div id='experiment' className='hidden w-4/5 mx-auto my-10'>
                 <Create  
                 first={'Aim'} 
                 second={'Method'} 
@@ -196,11 +196,12 @@ export default function Record({ study, datas, researches }) {
             
             <Tables Title='Research Record' Category='Category' num={researches} link={'/research/'}></Tables>
             
-            <Button variant="outlined" size='small' href={'/'}
-            >BACK</Button>
-            <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
-            >DELETE</Button>
-            
+            <div className="mt-10">
+                <Button variant="outlined" size='small' href={'/'}
+                >BACK</Button>
+                <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
+                >DELETE</Button>
+            </div>
         </>
         );
 }
