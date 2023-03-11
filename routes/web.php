@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\ResearchController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,10 +37,13 @@ Route::post('/record/{study}', [DataController::class,'record']);
 Route::get('/research/{research}', [ResearchController::class,"show"]);
 Route::get('/data/{data}', [DataController::class,"show"]);
 
-Route::delete('/deletestudy/{study}', [StudyController::class,"delete"])->name('deletestudy');
-Route::delete('/deleteresearch/{research}', [ResearchController::class,"delete"])->name('deleteresearch');
-Route::delete('/deletedata/{data}', [DataController::class,"delete"])->name('deletedata');
+Route::get('/category/{study}', [CategoryController::class,"category"]);
+Route::post('/createcategory/{study}', [CategoryController::class,'createcategory']);
 
+Route::delete('/deletestudy/{study}', [StudyController::class,"delete"])->name('delete.study');
+Route::delete('/deleteresearch/{research}', [ResearchController::class,"delete"])->name('delete.research');
+Route::delete('/deletedata/{data}', [DataController::class,"delete"])->name('delete.data');
+Route::delete('/deletecategory/{category}', [CategoryController::class,"delete"])->name('delete.category');
 
 /*
 Route::get('/', function () {

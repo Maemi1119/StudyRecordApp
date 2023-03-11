@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             StudyTableSeeder::class,
             DataTableSeeder::class,
             ResearchTableSeeder::class,
+            CategoryTableSeeder::class,
             ]);
         
     }

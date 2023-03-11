@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category');
-            $table->text('overview')->nullable();
-            $table->foreignID('study_id')->constrained('studies')->onDlete('cascade');
+            $table->text('comment')->nullable();
+            $table->foreignID('study_id')->constrained('studies')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

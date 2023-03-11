@@ -1,19 +1,23 @@
 import React, { useState,useCallback } from 'react';
 import { useForm } from '@inertiajs/react';
 import Header from '@/Components/Header';
+import RadioButtonsGroup from '@/Components/RadioButtonsGroup';
 import Create from '@/Components/Create';
 import Tables from '@/Components/Tables';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 export default function Record({ study, datas, researches }) {
-
+    
+    const categories = ['none', 'apple', 'banana'];
+    
     const { data, setData, post } = useForm({
         aim:'',
         method:'',
         tool:'',
         result:'',
         memo:'',
+        
         title: '',
         overview:'',
         link: '',
@@ -25,16 +29,15 @@ export default function Record({ study, datas, researches }) {
     
     //Switching the display of the choose screen
     let create = false;
-    const [newBtn, setNewBtn] = useState('NEW RECORD');
     const setShow = () =>{
         if (create == false){
             create = true;
             document.getElementById('create') . style . display = "block";
-            setNewBtn('CLOSE');
+            document.getElementById('show') . style . display = "none";
         }else{
             create = false;
             document.getElementById('create') . style . display = "none";
-            setNewBtn('NEW RECORD');
+            document.getElementById('show') . style . display = "block";
             record = true;
             imput = true;
             recordEx();
@@ -43,7 +46,7 @@ export default function Record({ study, datas, researches }) {
     };
     
     //Switching the display of the record screen
-    const recordEx = () =>{
+    const recordEx = (e) =>{
         if (record == false){
             document.getElementById('experiment') . style . display = "block";
             record = true;
@@ -67,16 +70,15 @@ export default function Record({ study, datas, researches }) {
     };
     
     let share = false;
-    const [newShare, setNewShare] = useState('Share');
     let sharepass = () =>{
         if (share == false){
             share = true;
             document.getElementById('share') . style . display = "block";
-            setNewShare('CLOSE');
+            document.getElementById('shareBtn') . style . display = "none";
         }else{
             share = false;
             document.getElementById('share') . style . display = "none";
-            setNewShare('Share');
+            document.getElementById('shareBtn') . style . display = "block";
         }
     };
     
@@ -115,7 +117,7 @@ export default function Record({ study, datas, researches }) {
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
         if(confirm('削除すると復元できません。本当に削除しますか？')){
-            destory(route("deletestudy", id), {
+            destory(route("delete.study", id), {
                 preserveScroll: true,
             });
         }
@@ -135,17 +137,22 @@ export default function Record({ study, datas, researches }) {
                     <p>{study.id}</p>
                     <h1 className="text-xl font-bold mt-6">Pass</h1>
                     <p>{study.pass}</p>
+                    <Button id='close' variant="outlined" size='small' onClick={() => sharepass()} 
+                    >close</Button>
                 </div>
-            <Button variant="outlined" size='small' onClick={() => sharepass()} 
-            >{newShare}</Button>
+            <Button id='shareBtn' variant="outlined" size='small' onClick={() => sharepass()} 
+            >share</Button>
             </div>
             
-            <Button variant="contained" onClick={() => setShow()} 
+            <Button id='show' variant="contained" onClick={() => setShow()} 
                 className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >{newBtn}</Button>
+            >NEW RECORD</Button>
             
             {/*Choose Screen*/}
             <div id='create' className='hidden w-4/5 my-10'>
+                <Button id='hide' variant="contained" onClick={() => setShow()} 
+                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                >CLOSE</Button>
                 <p>Please choose what you are about to record.</p>
                 <Button variant="outlined" size="large" onClick={() => recordEx()}>
                     Experiment/Survey
@@ -157,6 +164,7 @@ export default function Record({ study, datas, researches }) {
             
             {/*Experiment/Survey Record Entry Screen*/}
             <div id='experiment' className='hidden w-4/5 mx-auto my-10'>
+                {/*<RadioButtonsGroup ></RadioButtonsGroup>*/}
                 <Create  
                 first={'Aim'} 
                 second={'Method'} 
@@ -202,6 +210,10 @@ export default function Record({ study, datas, researches }) {
                 <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
                 >DELETE</Button>
             </div>
+            
+            <Button variant="contained" href={'/category/'+study.id}
+                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            >Category</Button>
         </>
         );
 }

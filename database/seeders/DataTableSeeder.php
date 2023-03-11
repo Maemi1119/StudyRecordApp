@@ -23,6 +23,7 @@ class DataTableSeeder extends Seeder
             'result' => '簡単なアプリケーションが制作できるようになった。',
             'memo' => '設計が大事',
             'study_id' => 1,
+            'category_id' => 1,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

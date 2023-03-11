@@ -9,7 +9,7 @@ export default function Experiment({datas}) {
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
         if(confirm('削除すると復元できません。本当に削除しますか？')){
-            destory(route("deletedata", id), {
+            destory(route("delete.data", id), {
                 preserveScroll: true,
             });
         }

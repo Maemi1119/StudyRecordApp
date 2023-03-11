@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('result');
             $table->text('memo')->nullable();
             $table->foreignID('study_id')->constrained('studies')->onDelete('cascade');
-            //$table->foreignID('category_id')->nullable()->constrained('categories');
+            $table->foreignID('category_id')->constrained('categories');
             //$table->foreignID('user_id')->constrained('users')->onDlete('cascade')->nullable();
             $table->timestamps();
             $table->softDeletes();

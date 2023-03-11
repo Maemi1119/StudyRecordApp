@@ -30,7 +30,6 @@ export default function Study({auth,studies}) {
             return item;
         }
     });
-    console.log(filteredList);
     
     //Switching the display of the registration screen
     let create = false;

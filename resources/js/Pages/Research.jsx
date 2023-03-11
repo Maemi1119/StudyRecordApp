@@ -5,11 +5,11 @@ import Header from '@/Components/Header';
 import Button from '@mui/material/Button';
 
 export default function Experiment({researches}) {
-    
+
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
         if(confirm('削除すると復元できません。本当に削除しますか？')){
-            destory(route("deleteresearch", id), {
+            destory(route("delete.research", id), {
                 preserveScroll: true,
             });
         }

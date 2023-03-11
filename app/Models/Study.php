@@ -9,6 +9,18 @@ class Study extends Model
 {
     use HasFactory;
     
+    public function user(){
+    return $this->hasOne(User::class);
+    }
+    
+    public function datas(){
+    return $this->hasMany(Data::class);
+    }
+    
+    public function researches(){
+    return $this->hasMany(Research::class);
+    }
+    
     protected $fillable = [
         'title',
         'overview',
