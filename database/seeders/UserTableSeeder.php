@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Guest',
             'email' => 'guest@guest.com',
-            'pass' => Hash::make('guest'),
+            'password' => Hash::make('guest'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);
@@ -28,7 +28,7 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Test',
             'email' => 'test@test.com',
-            'pass' => Hash::make('test'),
+            'password' => Hash::make('test'),
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
         ]);

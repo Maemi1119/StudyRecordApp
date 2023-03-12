@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Header from '@/Components/Header';
 import Button from '@mui/material/Button';
 
-export default function Experiment({researches}) {
+export default function Experiment({researches,category,user}) {
 
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
@@ -23,11 +23,16 @@ export default function Experiment({researches}) {
                 <h1 className="text-xl font-bold mt-6">Title</h1>
                 <p>{researches.title}</p>
                 
+                <h1 className="text-xl font-bold mt-6">Category</h1>
+                <p>{category[0].category}</p>
+                
                 <h1 className="text-xl font-bold mt-6">Body</h1>
                 <p>{researches.body}</p>
                 
                 <h1 className="text-xl font-bold mt-6">References</h1>
                 <p>{researches.link}</p>
+                
+                <p className='mt-10'>作成者　{user[0].name}</p>
                 
                 <div className="mt-10">
                     <Button variant="outlined" size='small' href={'/open/' + researches.study_id}

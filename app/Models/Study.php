@@ -25,5 +25,6 @@ class Study extends Model
         'title',
         'overview',
         'pass',
+        'user_id',
     ];
 }

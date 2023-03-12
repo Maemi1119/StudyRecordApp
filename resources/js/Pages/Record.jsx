@@ -127,93 +127,93 @@ export default function Record({ study, datas, researches }) {
         <>
             <Header>Record</Header> 
             
-            <div className='w-4/5 my-10'>
-            <h1 className="text-xl font-bold mt-6">StudyTitle</h1>
-            <p>{study.title}</p>
-            <h1 className="text-xl font-bold mt-6">Overview</h1>
-            <p>{study.overview}</p>
-                <div id='share' className='hidden'>
-                    <h1 className="text-xl font-bold mt-6">ShareID</h1>
-                    <p>{study.id}</p>
-                    <h1 className="text-xl font-bold mt-6">Pass</h1>
-                    <p>{study.pass}</p>
-                    <Button id='close' variant="outlined" size='small' onClick={() => sharepass()} 
-                    >close</Button>
+            <div className='w-4/5 mx-auto my-10'>
+                <div className='w-4/5 my-10'>
+                <h1 className="text-xl font-bold mt-6">StudyTitle</h1>
+                <p>{study.title}</p>
+                <h1 className="text-xl font-bold mt-6">Overview</h1>
+                <p>{study.overview}</p>
+                    <div id='share' className='hidden'>
+                        <h1 className="text-xl font-bold mt-6">ShareID</h1>
+                        <p>{study.id}</p>
+                        <h1 className="text-xl font-bold mt-6">Pass</h1>
+                        <p>{study.pass}</p>
+                        <Button id='close' variant="outlined" size='small' onClick={() => sharepass()} 
+                        >close</Button>
+                    </div>
+                <Button id='shareBtn' variant="outlined" size='small' onClick={() => sharepass()} 
+                >share</Button>
                 </div>
-            <Button id='shareBtn' variant="outlined" size='small' onClick={() => sharepass()} 
-            >share</Button>
-            </div>
-            
-            <Button id='show' variant="contained" onClick={() => setShow()} 
-                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >NEW RECORD</Button>
-            
-            {/*Choose Screen*/}
-            <div id='create' className='hidden w-4/5 my-10'>
-                <Button id='hide' variant="contained" onClick={() => setShow()} 
+                
+                <Button id='show' variant="contained" onClick={() => setShow()} 
                     className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                >CLOSE</Button>
-                <p>Please choose what you are about to record.</p>
-                <Button variant="outlined" size="large" onClick={() => recordEx()}>
-                    Experiment/Survey
-                </Button>
-                <Button variant="outlined" size="large" onClick={() => memory()}>
-                    Research
-                </Button>
+                >NEW RECORD</Button>
+                
+                {/*Choose Screen*/}
+                <div id='create' className='hidden w-4/5 my-10'>
+                    <Button id='hide' variant="contained" onClick={() => setShow()} 
+                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    >CLOSE</Button>
+                    <p>Please choose what you are about to record.</p>
+                    <Button variant="outlined" size="large" onClick={() => recordEx()}>
+                        Experiment/Survey
+                    </Button>
+                    <Button variant="outlined" size="large" onClick={() => memory()}>
+                        Research
+                    </Button>
+                </div>
+                
+                {/*Experiment/Survey Record Entry Screen*/}
+                <div id='experiment' className='hidden w-4/5 mx-auto my-10'>
+                    {/*<RadioButtonsGroup ></RadioButtonsGroup>*/}
+                    <Create  
+                    first={'Aim'} 
+                    second={'Method'} 
+                    third={'Tools'} 
+                    fourth={'Result'} 
+                    fifth={'memo'}
+                    firstPost={(e) => sAim(e)}
+                    secondPost={(e) => sMethod(e)}
+                    thirdPost={(e) => sTools(e)}
+                    fourthPost={(e) => sResult(e)}
+                    fifthPost={(e) => sMemo(e)}
+                    >
+                    </Create>
+                    <Button variant="outliend" onClick={() => recordEx()}>BACK</Button>
+                    <Button variant="contained" onClick={() => submit()}
+                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    >SAVE</Button>
+                </div>
+                
+                {/*Research Record Entry Screen*/}
+                <div id='research' className='hidden w-4/5 mx-auto my-10'>
+                    <Create 
+                    first={'Title'} 
+                    second={'Body'} 
+                    third={'References'}
+                    firstPost={(e) => sTitle(e)}
+                    secondPost={(e) => sBody(e)}
+                    thirdPost={(e) => sLink(e)}
+                    ></Create>
+                    <Button variant="outliend" onClick={() => memory()}>BACK</Button>
+                    <Button variant="contained" onClick={() => submit()}
+                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                    >SAVE</Button>
+                </div>
+                
+                <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'}></Tables>
+                
+                <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'}></Tables>
+                
+                <Button variant="outlined" href={'/category/'+study.id}
+                >CreateCategory</Button>
+                <div className="mt-10">
+                    <Button variant="outlined" size='small' href={'/'}
+                    >BACK</Button>
+                    <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
+                    >DELETE</Button>
+                </div>
             </div>
-            
-            {/*Experiment/Survey Record Entry Screen*/}
-            <div id='experiment' className='hidden w-4/5 mx-auto my-10'>
-                {/*<RadioButtonsGroup ></RadioButtonsGroup>*/}
-                <Create  
-                first={'Aim'} 
-                second={'Method'} 
-                third={'Tools'} 
-                fourth={'Result'} 
-                fifth={'memo'}
-                firstPost={(e) => sAim(e)}
-                secondPost={(e) => sMethod(e)}
-                thirdPost={(e) => sTools(e)}
-                fourthPost={(e) => sResult(e)}
-                fifthPost={(e) => sMemo(e)}
-                >
-                </Create>
-                <Button variant="outliend" onClick={() => recordEx()}>BACK</Button>
-                <Button variant="contained" onClick={() => submit()}
-                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                >SAVE</Button>
-            </div>
-            
-            {/*Research Record Entry Screen*/}
-            <div id='research' className='hidden w-4/5 mx-auto my-10'>
-                <Create 
-                first={'Title'} 
-                second={'Body'} 
-                third={'References'}
-                firstPost={(e) => sTitle(e)}
-                secondPost={(e) => sBody(e)}
-                thirdPost={(e) => sLink(e)}
-                ></Create>
-                <Button variant="outliend" onClick={() => memory()}>BACK</Button>
-                <Button variant="contained" onClick={() => submit()}
-                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                >SAVE</Button>
-            </div>
-            
-            <Tables Title='Experiment/Survey Record' Category='Category' num={datas} link={'/data/'}></Tables>
-            
-            <Tables Title='Research Record' Category='Category' num={researches} link={'/research/'}></Tables>
-            
-            <div className="mt-10">
-                <Button variant="outlined" size='small' href={'/'}
-                >BACK</Button>
-                <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
-                >DELETE</Button>
-            </div>
-            
-            <Button variant="contained" href={'/category/'+study.id}
-                className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-            >Category</Button>
         </>
         );
 }

@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Header from '@/Components/Header';
 import Button from '@mui/material/Button';
 
-export default function Experiment({datas}) {
+export default function Experiment({datas,category,user}) {
     
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
@@ -14,12 +14,14 @@ export default function Experiment({datas}) {
             });
         }
     };
-
     return(
         <>
             <Header>Content</Header>
             
             <div className='w-4/5 mx-auto my-10'>
+                <h1 className="text-xl font-bold mt-6">Category</h1>
+                <p>{category[0].category}</p>
+                
                 <h1 className="text-xl font-bold mt-6">Aim</h1>
                 <p>{datas.aim}</p>
                 
@@ -34,6 +36,8 @@ export default function Experiment({datas}) {
                 
                 <h1 className="text-xl font-bold mt-6">memo</h1>
                 <p>{datas.memo}</p>
+                
+                <p className='mt-10'>作成者　{user[0].name}</p>
                 
                 <div className="mt-10">
                     <Button variant="outlined" size='small' href={'/open/' + datas.study_id}

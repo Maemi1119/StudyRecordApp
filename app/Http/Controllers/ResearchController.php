@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Models\Research;
+use App\Models\Category;
+use App\Models\User;
 
 class ResearchController extends Controller
 {
     //
-    public function show(Research $research){
+    public function show(Research $research, Category $category, User $user){
         return Inertia::render('Research',[
-            'researches' => $research
+            'researches' => $research,
+            'category' => $category ->where('id', $research->category_id) ->get(),
+            'user' => $user ->where('id', $research->user_id) ->get(),
             ]);
     }
     
