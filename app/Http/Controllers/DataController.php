@@ -20,6 +20,7 @@ class DataController extends Controller
             'study'=> $study,
             'datas' => $data ->with('category') ->where('study_id', $study->id) ->get(),
             'researches' => $research ->with('category') ->where('study_id', $study->id) ->get(),
+            'categories' => $category ->where('study_id', $study->id) ->get()
             ]);
     }
     
@@ -42,7 +43,7 @@ class DataController extends Controller
                 'memo'=>$request['memo'],
                 'user_id'=>$userId,
                 'study_id'=>$study->id,
-                'category_id'=>1,
+                'category_id'=>$request['category_id'],
             ]);
         //Save of research records
         }elseif( !empty($request['title'] ) ){
@@ -52,7 +53,7 @@ class DataController extends Controller
                 'link'=>$request['link'],
                 'user_id'=>$userId,
                 'study_id'=>$study->id,
-                'category_id'=>1,
+                'category_id'=>$request['category_id'],
             ]);
         }
         return redirect('/open/' .  $study->id);
@@ -62,8 +63,35 @@ class DataController extends Controller
         return Inertia::render('Experiment',[
             'datas' => $data,
             'category' => $category ->where('id', $data->category_id) ->get(),
+            'categories' => $category ->get(),
             'user' => $user ->where('id', $data->user_id) ->get(),
             ]);
+    }
+    
+    public function update(Request $request, Data $post){
+        $user = Auth::id();
+        $userId = [];
+        if ( !empty($user) ){
+            $userId = $user;
+        }else{
+            $userId = 1;
+        }
+        
+        $data = array(
+                'aim'=>$request['aim'],
+                'method'=>$request['method'],
+                'tool'=>$request['tool'],
+                'result'=>$request['result'],
+                'memo'=>$request['memo'],
+                'user_id'=>$userId,
+                'study_id'=>$request['study_id'],
+                'category_id'=>$request['category_id'],
+            );
+                
+        $input_post = $data;
+        $post->fill($input_post)->save();
+        
+        return redirect('/research/' . $post->id);
     }
     
     public function delete(Data $data){

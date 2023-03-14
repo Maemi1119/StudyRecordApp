@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Study;
 use App\Models\User;
+use App\Models\Category;
 
 class StudyController extends Controller
 {
@@ -31,6 +32,12 @@ class StudyController extends Controller
             'overview'=>$request['overview'],
             'pass'=>$request['pass'],
             'user_id'=>$userId
+        ]);
+        
+        $none = Category::create([
+            'study_id'=> $study->id,
+            'category'=>'none',
+            'comment'=>'',
         ]);
         
         return redirect('/');

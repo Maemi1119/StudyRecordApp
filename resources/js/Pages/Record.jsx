@@ -1,17 +1,17 @@
 import React, { useState,useCallback } from 'react';
 import { useForm } from '@inertiajs/react';
 import Header from '@/Components/Header';
-import RadioButtonsGroup from '@/Components/RadioButtonsGroup';
 import Create from '@/Components/Create';
 import Tables from '@/Components/Tables';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Autocomplete from '@mui/material/Autocomplete';
 
-export default function Record({ study, datas, researches }) {
-    
-    const categories = ['none', 'apple', 'banana'];
+export default function Record({ study, datas, researches, categories}) {
     
     const { data, setData, post } = useForm({
+        category_id:1,
+        
         aim:'',
         method:'',
         tool:'',
@@ -21,7 +21,6 @@ export default function Record({ study, datas, researches }) {
         title: '',
         overview:'',
         link: '',
-        check:'',
     });
     
     let record = false;
@@ -82,13 +81,25 @@ export default function Record({ study, datas, researches }) {
         }
     };
     
+    let categoryList = [];
+    const addCategory = categories.map((item) => (
+            categoryList.push(item.category)
+        ));
+        
+    const [value, setValue] = useState(categoryList[0]);
+    const [inputValue, setInputValue] = useState('');
     
     //post
-    const submit = () =>{
+    const submit = (e) =>{
+        e.preventDefault();
         post(`/record/${study.id}`);
     };
     
     //Getting input values
+    const sCategory = (newInputValue) =>{
+        const categoryId = categories.filter((category) => category.category == newInputValue);
+        setData('category_id', categoryId[0].id);
+    };
     const sAim = useCallback((e) =>{
         setData('aim', e.target.value);
     });
@@ -166,6 +177,21 @@ export default function Record({ study, datas, researches }) {
                 {/*Experiment/Survey Record Entry Screen*/}
                 <div id='experiment' className='hidden w-4/5 mx-auto my-10'>
                     {/*<RadioButtonsGroup ></RadioButtonsGroup>*/}
+                    <Autocomplete
+                      value={value}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      inputValue={inputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                        sCategory(newInputValue);
+                      }}
+                      disablePortal
+                      options={categoryList}
+                      sx={{ width: 300 }}
+                      renderInput={(params) => <TextField {...params} label="Category"/> }
+                    />
                     <Create  
                     first={'Aim'} 
                     second={'Method'} 
@@ -180,13 +206,28 @@ export default function Record({ study, datas, researches }) {
                     >
                     </Create>
                     <Button variant="outliend" onClick={() => recordEx()}>BACK</Button>
-                    <Button variant="contained" onClick={() => submit()}
+                    <Button variant="contained" onClick={(e) => submit(e)}
                         className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     >SAVE</Button>
                 </div>
                 
                 {/*Research Record Entry Screen*/}
                 <div id='research' className='hidden w-4/5 mx-auto my-10'>
+                    <Autocomplete
+                      disablePortal
+                      value={value}
+                      onChange={(event, newValue) => {
+                        setValue(newValue);
+                      }}
+                      inputValue={inputValue}
+                      onInputChange={(event, newInputValue) => {
+                        setInputValue(newInputValue);
+                        sCategory(newInputValue);
+                      }}
+                      options={categoryList}
+                      sx={{ width: 300 }}
+                      renderInput={(params) => <TextField {...params} label="Category" /> }
+                    />
                     <Create 
                     first={'Title'} 
                     second={'Body'} 
@@ -196,7 +237,7 @@ export default function Record({ study, datas, researches }) {
                     thirdPost={(e) => sLink(e)}
                     ></Create>
                     <Button variant="outliend" onClick={() => memory()}>BACK</Button>
-                    <Button variant="contained" onClick={() => submit()}
+                    <Button variant="contained" onClick={(e) => submit(e)}
                         className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     >SAVE</Button>
                 </div>

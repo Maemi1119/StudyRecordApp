@@ -37,6 +37,9 @@ Route::post('/record/{study}', [DataController::class,'record']);
 Route::get('/research/{research}', [ResearchController::class,"show"]);
 Route::get('/data/{data}', [DataController::class,"show"]);
 
+Route::put('/updateresearch/{research}', [ResearchController::class,"update"]);
+Route::put('/updatedata/{data}', [DataController::class,"update"]);
+
 Route::get('/category/{study}', [CategoryController::class,"category"]);
 Route::post('/createcategory/{study}', [CategoryController::class,'createcategory']);
 
