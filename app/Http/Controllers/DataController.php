@@ -16,12 +16,18 @@ class DataController extends Controller
     //
     
     public function openrecord(Data $data, Research $research, Study $study, Category $category){
-        return Inertia::render('Record',[
+        $categories = $category ->where('study_id', $study->id) ->get();
+        
+        if(session('check'.$study->id)==true){
+            return Inertia::render('Record',[
             'study'=> $study,
             'datas' => $data ->with('category') ->where('study_id', $study->id) ->get(),
             'researches' => $research ->with('category') ->where('study_id', $study->id) ->get(),
-            'categories' => $category ->where('study_id', $study->id) ->get()
+            'categories' => $categories
             ]);
+        }else{
+            return redirect('/beforecheck/' . $study->id);
+        }
     }
     
     public function record(Request $request, Study $study){
@@ -56,42 +62,34 @@ class DataController extends Controller
                 'category_id'=>$request['category_id'],
             ]);
         }
-        return redirect('/open/' .  $study->id);
+            return redirect('/open/' .  $study->id);
     }
-    
-    public function show(Data $data, Category $category, User $user){
+
+public function show(Data $data, Category $category, User $user){
+    if(session('check'.$data->study_id)==true){
         return Inertia::render('Experiment',[
-            'datas' => $data,
-            'category' => $category ->where('id', $data->category_id) ->get(),
-            'categories' => $category ->get(),
-            'user' => $user ->where('id', $data->user_id) ->get(),
-            ]);
+        'datas' => $data,
+        'category' => $category ->where('id', $data->category_id) ->get(),
+        'categories' => $category ->get(),
+        'user' => $user ->where('id', $data->user_id) ->get(),
+        ]);
+    }else{
+        return redirect('/beforecheck/' . $study->id);
+    }
     }
     
-    public function update(Request $request, Data $post){
-        $user = Auth::id();
-        $userId = [];
-        if ( !empty($user) ){
-            $userId = $user;
-        }else{
-            $userId = 1;
-        }
+    public function update(Request $request, Data $data){
         
-        $data = array(
-                'aim'=>$request['aim'],
-                'method'=>$request['method'],
-                'tool'=>$request['tool'],
-                'result'=>$request['result'],
-                'memo'=>$request['memo'],
-                'user_id'=>$userId,
-                'study_id'=>$request['study_id'],
-                'category_id'=>$request['category_id'],
-            );
-                
-        $input_post = $data;
-        $post->fill($input_post)->save();
+        $input_post['aim'] = $request['aim'];
+        $input_post['method'] = $request['method'];
+        $input_post['tool'] = $request['tool'];
+        $input_post['result'] = $request['result'];
+        $input_post['memo'] = $request['memo'];
+        $input_post['category_id'] = $request['category_id'];
+     
+        $data->fill($input_post)->save();
         
-        return redirect('/research/' . $post->id);
+        return redirect('/data/' . $data->id);
     }
     
     public function delete(Data $data){

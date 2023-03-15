@@ -8,7 +8,16 @@ use App\Models\Category;
 use App\Models\Study;
 
 class CategoryController extends Controller
-{
+{   
+    public function none(Study $study, Category $category){
+        $none = Category::create([
+            'category' => 'NONE',
+            'comment' => '',
+            'study_id'=> $study->id
+        ]);
+        return redirect('/open/' .  $study->id);
+    }
+    
     public function category(Study $study, Category $category){
         return Inertia::render('Category',[
             'study'=> $study,

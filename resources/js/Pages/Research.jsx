@@ -7,9 +7,10 @@ import Button from '@mui/material/Button';
 import Create from '@/Components/Create';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export default function Experiment({researches,category, categories, user}) {
+export default function Research({researches,category, categories, user}) {
     
     const { data, setData, post, processing, errors, reset } = useForm({
+        id:researches.id,
         category_id:researches.category_id,
         title:researches.title,
         body:researches.body,
@@ -17,6 +18,8 @@ export default function Experiment({researches,category, categories, user}) {
         study_id:researches.study_id,
         _method:'put',
     });
+    
+    console.log(data);
     
     const { delete: destory } = useForm();
     const handleDelete = (id) => {

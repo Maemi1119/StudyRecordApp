@@ -30,6 +30,10 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', [StudyController::class,"study"]);
 Route::post('/create', [StudyController::class,'create']);
+Route::post('/none/{study}', [CategoryController::class,'none']);
+
+Route::get('/beforecheck/{study}', [StudyController::class,"beforecheck"]);
+Route::post('/check/{study}', [StudyController::class,"check"]);
 
 Route::get('/open/{study}', [DataController::class,"openrecord"]);
 Route::post('/record/{study}', [DataController::class,'record']);

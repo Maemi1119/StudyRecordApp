@@ -19,6 +19,20 @@ class StudyController extends Controller
             ]);
     }
     
+    public function beforecheck(Study $study){
+        return Inertia::render('CheckPass',[
+                'study' => $study ->where('id', $study->id) ->first()
+            ]);
+    }
+    
+    public function check(Request $request, Study $study){
+        if( $study->pass == $request['pass'] ){
+            session(['check'.$study->id => true]);
+            return redirect('/open/' .  $study->id);
+        }
+        return redirect()->back()->withErrors(['missing' => 'Incorrect password']);
+    }
+    
     public function create(Request $request, Study $study){
         $user = Auth::id();
         $userId = [];
@@ -33,15 +47,7 @@ class StudyController extends Controller
             'pass'=>$request['pass'],
             'user_id'=>$userId
         ]);
-        
-        $none = Category::create([
-            'study_id'=> $study->id,
-            'category'=>'none',
-            'comment'=>'',
-        ]);
-        
         return redirect('/');
-        //return redirect('/open/' . $study->id);
     }
     
     public function delete(Study $study){

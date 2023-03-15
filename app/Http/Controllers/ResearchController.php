@@ -13,35 +13,28 @@ class ResearchController extends Controller
 {
     //
     public function show(Research $research, Category $category, User $user){
-        return Inertia::render('Research',[
+        if(session('check'.$research->study_id)==true){
+            return Inertia::render('Research',[
             'researches' => $research,
             'category' => $category ->where('id', $research->category_id) ->get(),
             'categories' => $category ->get(),
             'user' => $user ->where('id', $research->user_id) ->get(),
             ]);
+        }else{
+            return redirect('/beforecheck/' . $study->id);
+        }
     }
     
-    public function update(Request $request, Research $post){
-        $user = Auth::id();
-        $userId = [];
-        if ( !empty($user) ){
-            $userId = $user;
-        }else{
-            $userId = 1;
-        }
+    public function update(Request $request, Research $research){
         
-        $data = array(
-                'title'=>$request['title'],
-                'body'=>$request['body'],
-                'link'=>$request['link'],
-                'user_id'=>$userId,
-                'study_id'=>$request['study_id'],
-                'category_id'=>$request['category_id']);
-                
-        $input_post = $data;
-        $post->fill($input_post)->save();
+        $input_post['title'] = $request['title'];
+        $input_post['body'] = $request['body'];
+        $input_post['link'] = $request['link'];
+        $input_post['category_id'] = $request['category_id'];
+  
+        $research->fill($input_post)->save();
         
-        return redirect('/research/' . $post->id);
+        return redirect('/research/' . $research->id);
     }
     
     public function delete(Research $research){

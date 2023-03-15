@@ -28,19 +28,24 @@ export default function Record({ study, datas, researches, categories}) {
     
     //Switching the display of the choose screen
     let create = false;
-    const setShow = () =>{
-        if (create == false){
-            create = true;
-            document.getElementById('create') . style . display = "block";
-            document.getElementById('show') . style . display = "none";
+    const setShow = (e) =>{
+        if(categories.length == 0){
+            e.preventDefault();
+            post(`/none/${study.id}`);
         }else{
-            create = false;
-            document.getElementById('create') . style . display = "none";
-            document.getElementById('show') . style . display = "block";
-            record = true;
-            imput = true;
-            recordEx();
-            memory();
+            if (create == false){
+                create = true;
+                document.getElementById('create') . style . display = "block";
+                document.getElementById('show') . style . display = "none";
+            }else{
+                create = false;
+                document.getElementById('create') . style . display = "none";
+                document.getElementById('show') . style . display = "block";
+                record = true;
+                imput = true;
+                recordEx();
+                memory();
+            }
         }
     };
     
@@ -156,7 +161,7 @@ export default function Record({ study, datas, researches, categories}) {
                 >share</Button>
                 </div>
                 
-                <Button id='show' variant="contained" onClick={() => setShow()} 
+                <Button id='show' variant="contained" onClick={(e) => setShow(e)} 
                     className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                 >NEW RECORD</Button>
                 
