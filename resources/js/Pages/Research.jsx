@@ -1,5 +1,4 @@
 import React, { useState,useCallback } from 'react';
-import {Inertia} from "@inertiajs/react";
 import { useForm } from '@inertiajs/react';
 import TextField from '@mui/material/TextField';
 import Header from '@/Components/Header';
@@ -19,11 +18,9 @@ export default function Research({researches,category, categories, user}) {
         _method:'put',
     });
     
-    console.log(data);
-    
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
-        if(confirm('削除すると復元できません。本当に削除しますか？')){
+        if(confirm("If you delete it, you can't restore it. Are you sure you want to delete it?")){
             destory(route("delete.research", id), {
                 preserveScroll: true,
             });

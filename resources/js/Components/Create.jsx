@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 
 export default function Create({id,first,second,third,fourth,fifth,firstPost,secondPost,thirdPost,fourthPost,fifthPost,firstValue,secondValue,thirdValue,fourthValue,fifthValue,number}) {
     

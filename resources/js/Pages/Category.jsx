@@ -1,16 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from '@inertiajs/react';
 import Header from '@/Components/Header';
-import Create from '@/Components/Create';
 import Dividers from '@/Components/Dividers';
-import Tables from '@/Components/Tables';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
 
 export default function Category({auth, study, categories}) {
     
-    console.log(categories);
     //Survey Registration
     const { data, setData, post } = useForm({
         category:'',
@@ -33,10 +30,14 @@ export default function Category({auth, study, categories}) {
     
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
-        if(confirm('削除すると復元できません。本当に削除しますか？')){
-            destory(route("delete.category", id), {
-                preserveScroll: true,
-            });
+        if( id == categories[0].id ){
+            alert('"NONE" cannot be deleted.');
+        }else{
+            if(confirm("If you delete it, you can't restore it. Are you sure you want to delete it?")){
+                destory(route("delete.category", id), {
+                    preserveScroll: true,
+                });
+            }
         }
     };
     

@@ -29,23 +29,18 @@ export default function Record({ study, datas, researches, categories}) {
     //Switching the display of the choose screen
     let create = false;
     const setShow = (e) =>{
-        if(categories.length == 0){
-            e.preventDefault();
-            post(`/none/${study.id}`);
+        if (create == false){
+            create = true;
+            document.getElementById('create') . style . display = "block";
+            document.getElementById('show') . style . display = "none";
         }else{
-            if (create == false){
-                create = true;
-                document.getElementById('create') . style . display = "block";
-                document.getElementById('show') . style . display = "none";
-            }else{
-                create = false;
-                document.getElementById('create') . style . display = "none";
-                document.getElementById('show') . style . display = "block";
-                record = true;
-                imput = true;
-                recordEx();
-                memory();
-            }
+            create = false;
+            document.getElementById('create') . style . display = "none";
+            document.getElementById('show') . style . display = "block";
+            record = true;
+            imput = true;
+            recordEx();
+            memory();
         }
     };
     
@@ -132,7 +127,7 @@ export default function Record({ study, datas, researches, categories}) {
     
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
-        if(confirm('削除すると復元できません。本当に削除しますか？')){
+        if(confirm("If you delete it, you can't restore it. Are you sure you want to delete it?")){
             destory(route("delete.study", id), {
                 preserveScroll: true,
             });
@@ -247,9 +242,9 @@ export default function Record({ study, datas, researches, categories}) {
                     >SAVE</Button>
                 </div>
                 
-                <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'}></Tables>
+                <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'} method='get'></Tables>
                 
-                <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'}></Tables>
+                <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'} method='get'></Tables>
                 
                 <Button variant="outlined" href={'/category/'+study.id}
                 >CreateCategory</Button>

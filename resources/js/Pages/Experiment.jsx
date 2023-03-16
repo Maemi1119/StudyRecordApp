@@ -21,7 +21,7 @@ export default function Experiment({datas,category,categories,user}) {
     
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
-        if(confirm('削除すると復元できません。本当に削除しますか？')){
+        if(confirm("If you delete it, you can't restore it. Are you sure you want to delete it?")){
             destory(route("delete.data", id), {
                 preserveScroll: true,
             });
