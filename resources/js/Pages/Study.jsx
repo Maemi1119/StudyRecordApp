@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useForm, Link} from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 import escapeStringRegexp from "escape-string-regexp";
 import Header from '@/Components/Header';
 import Create from '@/Components/Create';
@@ -76,7 +76,7 @@ export default function Study({auth, studies, study}) {
                     />
                 </div>
                 <h1 className="text-xl font-bold mt-2">Result</h1>
-                <Tables Title='StudyTitle' num={filteredList} link={'/none/'} method='post'></Tables>
+                <Tables Title='StudyTitle' num={filteredList} link={'/none/'} methods='post'></Tables>
             </div>
             
             <div className='w-4/5 mx-auto my-10'>
@@ -104,7 +104,7 @@ export default function Study({auth, studies, study}) {
                 {auth.user ? (
                      <>
                         {/*Study List*/}
-                        <Tables Title='StudyTitle' num={study} link={'/open/'} method='get'></Tables>
+                        <Tables Title='StudyTitle' num={study} link={'/none/'} methods='post'></Tables>
                         <Link href={route('logout')} method="post">LOG OUT</Link>
                      </>
                 ) : (

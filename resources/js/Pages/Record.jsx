@@ -242,9 +242,9 @@ export default function Record({ study, datas, researches, categories}) {
                     >SAVE</Button>
                 </div>
                 
-                <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'} method='get'></Tables>
+                <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'} methods='get'></Tables>
                 
-                <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'} method='get'></Tables>
+                <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'} methods='get'></Tables>
                 
                 <Button variant="outlined" href={'/category/'+study.id}
                 >CreateCategory</Button>
