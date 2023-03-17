@@ -4,7 +4,8 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import Button from '@mui/material/Button';
+import { Head, Link, useForm, router } from '@inertiajs/react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -114,6 +115,8 @@ export default function Register() {
                     <PrimaryButton className="ml-4" disabled={processing}>
                         Register
                     </PrimaryButton>
+                    <Button variant="outlined" onClick={() => router.get('/')}
+                    >BACK</Button>
                 </div>
             </form>
         </GuestLayout>
