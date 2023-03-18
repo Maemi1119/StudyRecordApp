@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('studies', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('overview');
-            $table->string('pass');
+            $table->text('overview') ->nullable();
+            $table->string('pass') ->nullable();
             $table->foreignID('user_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->timestamps();
             $table->softDeletes();

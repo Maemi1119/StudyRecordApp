@@ -33,6 +33,7 @@ export default function Register() {
 
     return (
         <GuestLayout>
+            <Header>Register</Header> 
             <Head title="Register" />
 
             <form onSubmit={submit}>
