@@ -9,7 +9,7 @@ import TextInput from '@/Components/TextInput';
 import Button from '@mui/material/Button';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 
-export default function Login({ status, canResetPassword }) {
+export default function Login({ status,canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -31,10 +31,8 @@ export default function Login({ status, canResetPassword }) {
 
         post(route('login'));
     };
-    console.log(status);
     return (
         <>
-            <Header>Log In</Header> 
             <GuestLayout>
                 <Head title="Log in" />
     

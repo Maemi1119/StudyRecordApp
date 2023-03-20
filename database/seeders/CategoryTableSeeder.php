@@ -17,7 +17,7 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'category' => 'none',
+            'category' => 'NONE',
             'comment' => '',
             'study_id' => 1,
             'created_at' => new DateTime(),

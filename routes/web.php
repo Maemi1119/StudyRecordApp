@@ -20,15 +20,8 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-/*Route::get('/', function(){
-    return Inertia::render('Content');
-});*/
 
-
-
-
-
-Route::get('/', [StudyController::class,"study"]);
+Route::get('/', [StudyController::class,"study"])->name('study');
 Route::post('/create', [StudyController::class,'create']);
 Route::post('/none/{study}', [CategoryController::class,'none']);
 
@@ -52,25 +45,10 @@ Route::delete('/deleteresearch/{research}', [ResearchController::class,"delete"]
 Route::delete('/deletedata/{data}', [DataController::class,"delete"])->name('delete.data');
 Route::delete('/deletecategory/{category}', [CategoryController::class,"delete"])->name('delete.category');
 
-/*
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-*/
 
 require __DIR__.'/auth.php';

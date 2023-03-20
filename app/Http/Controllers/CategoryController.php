@@ -10,11 +10,14 @@ use App\Models\Study;
 class CategoryController extends Controller
 {   
     public function none(Study $study, Category $category){
-        $none = Category::create([
-            'category' => 'NONE',
-            'comment' => '',
-            'study_id'=> $study->id
-        ]);
+        $categories = $category->where('study_id',$study->id)->get();
+        if( empty($categories[0]) ){
+            $none = Category::create([
+                'category' => 'NONE',
+                'comment' => '',
+                'study_id'=> $study->id
+            ]);
+        }
         return redirect('/open/' .  $study->id);
     }
     

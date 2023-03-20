@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm,router } from '@inertiajs/react';
 import Header from '@/Components/Header';
 import Dividers from '@/Components/Dividers';
 import TextField from '@mui/material/TextField';
@@ -22,10 +22,22 @@ export default function Category({auth, study, categories}) {
     const sComment = useCallback((e, value) =>{
         setData('comment', e.target.value);
     });
-
+    
+    const validation = () => {
+        if(data.category.length !== 0){
+            return true;
+        }else{
+            alert('"Category" is blank.');
+            return false;
+        }
+    };
+    
     //post
-    const submit = () =>{
-        post(`/createcategory/${study.id}`);
+    const submit = (e) =>{
+        if( validation() ){
+            e.preventDefault();
+            post(`/createcategory/${study.id}`);
+        }
     };
     
     const { delete: destory } = useForm();
@@ -43,7 +55,7 @@ export default function Category({auth, study, categories}) {
     
     return(
         <>
-            <Header>Category</Header>
+            <Header auth={auth}>Category</Header>
             
             <div className='w-4/5 mx-auto my-10'>
                 <h1 className="text-xl font-bold mt-6">CreateCategories</h1>
@@ -52,7 +64,7 @@ export default function Category({auth, study, categories}) {
                 
                 <h1 className="text-xl mt-6">Comment</h1>
                 <TextField fullWidth onChange={(e) => sComment(e)}/>
-                <Button variant="contained" onClick={() => submit()}
+                <Button variant="contained" onClick={(e) => submit(e)}
                     className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                 >SAVE</Button>
             </div>
@@ -63,7 +75,7 @@ export default function Category({auth, study, categories}) {
             </div>
             
             <div className='w-4/5 mx-auto my-10'>
-                <Button className='w-4/5' variant="outlined" size='small' href={'/open/' + study.id}
+                <Button className='w-4/5' variant="outlined" size='small' onClick={() => router.get('/open/' + study.id)}
                 >BACK</Button>
             </div>
         </>

@@ -6,8 +6,9 @@ import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import Create from '@/Components/Create';
 
-export default function Experiment({datas,category,categories,user}) {
+export default function Experiment({auth,datas,category,categories,user}) {
     
+    //Modify Data Form
     const { data, setData, post, processing, errors, reset } = useForm({
         category_id:datas.category_id,
         aim:datas.aim,
@@ -19,6 +20,7 @@ export default function Experiment({datas,category,categories,user}) {
         _method:'put',
     });
     
+    //delete Datas
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
         if(confirm("If you delete it, you can't restore it. Are you sure you want to delete it?")){
@@ -78,7 +80,7 @@ export default function Experiment({datas,category,categories,user}) {
     
     return(
         <>
-            <Header>Content</Header>
+            <Header auth={auth}>Content</Header>
             
             <div id='modify' className='hidden w-4/5 mx-auto my-10'>
                 <Autocomplete

@@ -1,5 +1,5 @@
 import React, { useState,useCallback } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm,router } from '@inertiajs/react';
 import Header from '@/Components/Header';
 import Create from '@/Components/Create';
 import Tables from '@/Components/Tables';
@@ -7,8 +7,9 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export default function Record({ study, datas, researches, categories}) {
+export default function Record({ auth, study, datas, researches, categories}) {
     
+    //Record Form
     const { data, setData, post } = useForm({
         category_id:1,
         
@@ -19,12 +20,13 @@ export default function Record({ study, datas, researches, categories}) {
         memo:'',
         
         title: '',
-        overview:'',
+        body:'',
         link: '',
     });
     
+    
     let record = false;
-    let imput = false;
+    let input = false;
     
     //Switching the display of the choose screen
     let create = false;
@@ -38,7 +40,7 @@ export default function Record({ study, datas, researches, categories}) {
             document.getElementById('create') . style . display = "none";
             document.getElementById('show') . style . display = "block";
             record = true;
-            imput = true;
+            input = true;
             recordEx();
             memory();
         }
@@ -50,24 +52,23 @@ export default function Record({ study, datas, researches, categories}) {
             document.getElementById('experiment') . style . display = "block";
             record = true;
             document.getElementById('research') . style . display = "none";
-            imput = false;
+            input = false;
         }else{
             document.getElementById('experiment') . style . display = "none";
             record = false;
         }
     };
     const memory = () =>{
-        if (imput == false){
+        if (input == false){
             document.getElementById('research') . style . display = "block";
-            imput = true;
+            input = true;
             document.getElementById('experiment') . style . display = "none";
             record = false;
         }else{
             document.getElementById('research') . style . display = "none";
-            imput = false;
+            input = false;
         }
     };
-    
     let share = false;
     let sharepass = () =>{
         if (share == false){
@@ -81,18 +82,66 @@ export default function Record({ study, datas, researches, categories}) {
         }
     };
     
+    //Category values
     let categoryList = [];
     const addCategory = categories.map((item) => (
             categoryList.push(item.category)
         ));
-        
     const [value, setValue] = useState(categoryList[0]);
     const [inputValue, setInputValue] = useState('');
     
+    //Validation
+    const exVali = () => {
+        if(document.getElementById('experiment').style.display == "block"){
+            if(data.aim.length !== 0){
+            }else{
+                alert('"Aim" is blank.');
+                return false;
+            }
+            if(data.method.length !== 0){
+            }else{
+                alert('"Method" is blank.');
+                return false;
+            }
+            if(data.result.length !== 0){
+            }else{
+                alert('"Result" is blank.');
+                return false;
+            }
+            return true;
+        }else{
+            return true;
+        }
+    };
+    const reVali = () => {
+        if(document.getElementById('research').style.display == "block"){
+            if(data.title.length !== 0){
+            }else{
+                alert('"Title" is blank.');
+                return false;
+            }
+            if(data.body.length !== 0){
+            }else{
+                alert('"Body" is blank.');
+                return false;
+            }
+            if(data.link.length !== 0){
+            }else{
+                alert('"References" is blank.');
+                return false;
+            }
+            return true;
+        }else{
+            return true;
+        }
+    };
+    
     //post
     const submit = (e) =>{
-        e.preventDefault();
-        post(`/record/${study.id}`);
+        if( exVali() && reVali() ){
+            e.preventDefault();
+            post(`/record/${study.id}`);
+        }
     };
     
     //Getting input values
@@ -125,6 +174,7 @@ export default function Record({ study, datas, researches, categories}) {
         setData('link', e.target.value);
     });
     
+    //delete Studies
     const { delete: destory } = useForm();
     const handleDelete = (id) => {
         if(confirm("If you delete it, you can't restore it. Are you sure you want to delete it?")){
@@ -136,8 +186,9 @@ export default function Record({ study, datas, researches, categories}) {
     
     return(
         <>
-            <Header>Record</Header> 
+            <Header auth={auth}>Record</Header> 
             
+            {/*Study Information*/}
             <div className='w-4/5 mx-auto my-10'>
                 <div className='w-4/5 my-10'>
                 <h1 className="text-xl font-bold mt-6">StudyTitle</h1>
@@ -245,11 +296,12 @@ export default function Record({ study, datas, researches, categories}) {
                 <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'} methods='get'></Tables>
                 
                 <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'} methods='get'></Tables>
-                
-                <Button variant="outlined" href={'/category/'+study.id}
-                >CreateCategory</Button>
+                <div className='mt-10'>
+                    <Button variant="outlined" onClick={() => router.get('/category/'+study.id)}
+                    >Categories</Button>
+                </div>
                 <div className="mt-10">
-                    <Button variant="outlined" size='small' href={'/'}
+                    <Button variant="outlined" size='small' onClick={() => router.get('/')}
                     >BACK</Button>
                     <Button variant="outlined" size='small' onClick={()=>handleDelete(study.id)}
                     >DELETE</Button>
