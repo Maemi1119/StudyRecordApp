@@ -1,66 +1,94 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## About StudyRecordApp
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+StudyRecordApp is a WEB application for recording research results.
+You can use the functions using this application, such as:
 
-## About Laravel
+- Register of studies to be recorded.
+- Delete enrolled studies.
+- Search for research within the application
+- Preservation of experimental results and survey records.
+- Editing experimental results and survey records.
+- Deletion of experiment results and survey records.
+- Register categories.
+- Set categories in experiment results and survey records.
+- Delete categories.
+- Login authentication.
+- Manage access to studies with a password.
+- Share your research results with your peers.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This application started myself-made on March 5, 2023 and was completed on March 21, 2023. The production time is about 64 hours.
+I created this application because my graduation research started and I wanted a tool to centrally manage the contents of academic papers and experimental results.
+There are three points that I devised in the production.
+- I choosed the view is not a Laravel brade file, but a React .js. Since React .js allows you to change pages without page transitions, it is possible to display the input form only when necessary, which leads to improved convenience.
+- Since research is not always conducted alone, we have implemented a system for sharing research with multiple people. Specifically, I implemented the ability to search for studies and password-manage access to records.
+- To manage whether you have passed the password confirmation in PHP session. This eliminates the need to enter the password every times when transitioning pages, and you can use it comfortably.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Programming
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The techniques I used this time are as follows.
 
-## Learning Laravel
+- AWS
+- PHP
+- Laravel
+- JavaScript
+- React.js
+- Tawilwind CSS
+- Material UI
+- SQL
+- Maria DB
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Portfolio URL (planned)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This app is deployed [here](https://).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Recording Updates
 
-## Laravel Sponsors
+- None.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
+## StudyRecordAppについて
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+StudyRecordAppは、研究成果を記録するためのWEBアプリケーションです。
+以下の機能を実装しました。
 
-## Contributing
+- 記録する研究の登録
+- 登録した研究の削除
+- アプリケーション内に記録された研究の検索
+- 実験結果や調査記録の登録
+- 実験結果や調査記録の編集
+- 実験結果や調査記録の削除
+- カテゴリーの登録
+- 実験結果や調査記録のカテゴリーの設定
+- カテゴリーの削除
+- ログイン認証機能
+- 研究記録へのアクセスのパスワードによる管理
+- 研究記録の共有
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+このアプリケーションは2023/3/5に自主制作を始め、2023/3/21に完成しました。制作時間は約64時間です。
+卒業研究が始まり、学術論文の内容や実験結果を一元管理するツールが欲しかったので、このアプリケーションを作成しました。
+工夫した点は以下の３つです。
+- viewにLaravelのbradeファイルではなく、React.jsを利用したことです。React.jsではページ遷移をせずページを変えることができるため、入力フォームが必要な時だけ表示することを実現しており、利便性の向上に繋がっています。
+- 研究は一人で行うとは限らないため、複数人で共有する仕組みを実装したことです。具体的には、研究を検索する機能と記録へのアクセスをパスワードで管理する機能を実装しました。
+- パスワードによる確認をクリアしたかどうかをPHPのsessionで管理することです。これにより、ページ遷移の際に何度もパスワードを入力する必要がなく、快適に利用できます。
 
-## Code of Conduct
+## 技術
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+使用した技術は以下の通りです。
 
-## Security Vulnerabilities
+- AWS
+- PHP
+- Laravel
+- JavaScript
+- React.js
+- Tawilwind CSS
+- Material UI
+- SQL
+- Maria DB
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## ポートフォリオURL(未設定）
 
-## License
+ポートフォリオは[こちら](https://)です。
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## アップデートの記録
+
+- なし
