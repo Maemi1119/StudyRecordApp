@@ -3,13 +3,14 @@ import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import Header from '@/Components/Header';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import Button from '@mui/material/Button';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 
 export default function Login({ status,canResetPassword }) {
+    
+    //Login Form
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -21,14 +22,15 @@ export default function Login({ status,canResetPassword }) {
             reset('password');
         };
     }, []);
-
+    
+    //Management Checkboxes
     const handleOnChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
 
+    //post
     const submit = (e) => {
         e.preventDefault();
-
         post(route('login'));
     };
     return (
@@ -39,9 +41,10 @@ export default function Login({ status,canResetPassword }) {
                 {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
     
                 <form onSubmit={submit}>
+                    
+                    {/* email */}
                     <div>
                         <InputLabel htmlFor="email" value="Email" />
-    
                         <TextInput
                             id="email"
                             type="email"
@@ -52,10 +55,10 @@ export default function Login({ status,canResetPassword }) {
                             isFocused={true}
                             onChange={handleOnChange}
                         />
-    
                         <InputError message={errors.email} className="mt-2" />
                     </div>
-    
+                    
+                    {/* password */}
                     <div className="mt-4">
                         <InputLabel htmlFor="password" value="Password" />
     
@@ -68,17 +71,16 @@ export default function Login({ status,canResetPassword }) {
                             autoComplete="current-password"
                             onChange={handleOnChange}
                         />
-    
                         <InputError message={errors.password} className="mt-2" />
                     </div>
-    
                     <div className="block mt-4">
                         <label className="flex items-center">
                             <Checkbox name="remember" value={data.remember} onChange={handleOnChange} />
                             <span className="ml-2 text-sm text-gray-600">Remember me</span>
                         </label>
                     </div>
-    
+                    
+                    {/* Link to Reset Password */}
                     <div className="flex items-center justify-end mt-4">
                         {canResetPassword && (
                             <Link

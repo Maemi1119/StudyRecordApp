@@ -7,6 +7,8 @@ import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function ConfirmPassword() {
+    
+    //ConfirmPassword Form
     const { data, setData, post, processing, errors, reset } = useForm({
         password: '',
     });
@@ -21,9 +23,9 @@ export default function ConfirmPassword() {
         setData(event.target.name, event.target.value);
     };
 
+    //post
     const submit = (e) => {
         e.preventDefault();
-
         post(route('password.confirm'));
     };
 

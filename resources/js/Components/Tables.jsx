@@ -9,7 +9,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-
 export default function Tables({Title, Category, num, title, link, methods}) {
     
     return(
@@ -18,6 +17,9 @@ export default function Tables({Title, Category, num, title, link, methods}) {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
+                    { methods == 'post' &&
+                        <TableCell>Id</TableCell>
+                    }
                     <TableCell>{Title}</TableCell>
                     <TableCell>{Category}</TableCell>
                     <TableCell align="right">Date</TableCell>
@@ -30,6 +32,12 @@ export default function Tables({Title, Category, num, title, link, methods}) {
                               key={row.title}
                               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
+                            
+                            { methods == 'post' &&
+                                <TableCell component="th" scope="row">
+                                    {row.id}
+                                </TableCell>
+                            }
                             { row.title &&
                                 <TableCell component="th" scope="row">
                                     {row.title}

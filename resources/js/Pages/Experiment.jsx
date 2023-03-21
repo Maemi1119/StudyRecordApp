@@ -30,6 +30,7 @@ export default function Experiment({auth,datas,category,categories,user}) {
         }
     };
     
+    // Show modify screen
     let modify = false;
     const setShow = () =>{
         if (modify == false){
@@ -43,15 +44,15 @@ export default function Experiment({auth,datas,category,categories,user}) {
         }
     };
     
-    
+    // CategoryList
     let categoryList = [];
     const addCategory = categories.map((item) => (
             categoryList.push(item.category)
         ));
-        
     const [value, setValue] = useState(categoryList[datas.category_id-1]);
     const [inputValue, setInputValue] = useState('');
     
+    //Getting input values
     const sCategory = (newInputValue) =>{
         const categoryId = categories.filter((category) => category.category == newInputValue);
         setData('category_id', categoryId[0].id);
@@ -72,6 +73,7 @@ export default function Experiment({auth,datas,category,categories,user}) {
         setData('memo', e.target.value);
     });
     
+    //post
     const submit = (e) => {
         e.preventDefault();
         post('/updatedata/'+datas.id);
@@ -82,6 +84,7 @@ export default function Experiment({auth,datas,category,categories,user}) {
         <>
             <Header auth={auth}>Content</Header>
             
+            {/* Record Modify Screen */}
             <div id='modify' className='hidden w-4/5 mx-auto my-10'>
                 <Autocomplete
                   value={value}
@@ -121,7 +124,7 @@ export default function Experiment({auth,datas,category,categories,user}) {
                 >SAVE</Button>
             </div>
             
-            
+            {/* Show Record Contents */}
             <div id='result' className='w-4/5 mx-auto my-10'>
                 <h1 className="text-xl font-bold mt-6">Category</h1>
                 <p>{category[0].category}</p>

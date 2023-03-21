@@ -5,6 +5,8 @@ import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function ForgotPassword({ status }) {
+    
+    //ForgotPassword Form
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });
@@ -13,9 +15,9 @@ export default function ForgotPassword({ status }) {
         setData(event.target.name, event.target.value);
     };
 
+    //post
     const submit = (e) => {
         e.preventDefault();
-
         post(route('password.email'));
     };
 

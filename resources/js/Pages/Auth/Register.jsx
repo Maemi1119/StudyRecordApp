@@ -8,6 +8,8 @@ import Button from '@mui/material/Button';
 import { Head, Link, useForm, router } from '@inertiajs/react';
 
 export default function Register() {
+    
+    //Account Register Form
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -20,11 +22,13 @@ export default function Register() {
             reset('password', 'password_confirmation');
         };
     }, []);
-
+    
+    //Management Checkboxes
     const handleOnChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
-
+    
+    //post
     const submit = (e) => {
         e.preventDefault();
 
@@ -36,9 +40,10 @@ export default function Register() {
             <Head title="Register" />
 
             <form onSubmit={submit}>
+            
+                {/*name*/}
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
-
                     <TextInput
                         id="name"
                         name="name"
@@ -49,13 +54,12 @@ export default function Register() {
                         onChange={handleOnChange}
                         required
                     />
-
                     <InputError message={errors.name} className="mt-2" />
                 </div>
-
+                
+                {/*email*/}
                 <div className="mt-4">
                     <InputLabel htmlFor="email" value="Email" />
-
                     <TextInput
                         id="email"
                         type="email"
@@ -66,13 +70,12 @@ export default function Register() {
                         onChange={handleOnChange}
                         required
                     />
-
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
+                {/*password*/}
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
-
                     <TextInput
                         id="password"
                         type="password"
@@ -83,13 +86,12 @@ export default function Register() {
                         onChange={handleOnChange}
                         required
                     />
-
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
+                {/*Confirm Password*/}
                 <div className="mt-4">
                     <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
                     <TextInput
                         id="password_confirmation"
                         type="password"
@@ -100,10 +102,10 @@ export default function Register() {
                         onChange={handleOnChange}
                         required
                     />
-
                     <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
+                {/*login*/}
                 <div className="flex items-center justify-end mt-4">
                     <Link
                         href={route('login')}

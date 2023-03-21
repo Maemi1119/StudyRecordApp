@@ -293,6 +293,7 @@ export default function Record({ auth, study, datas, researches, categories}) {
                     >SAVE</Button>
                 </div>
                 
+                {/* Record Tables */}
                 <Tables Title='Experiment/Survey Record' Category='Category ' num={datas} link={'/data/'} methods='get'></Tables>
                 
                 <Tables Title='Research Record' Category='Category ' num={researches} link={'/research/'} methods='get'></Tables>

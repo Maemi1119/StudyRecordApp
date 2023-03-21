@@ -29,6 +29,7 @@ export default function Research({ auth, researches,category, categories, user})
         }
     };
     
+    // Show modify screen
     let modify = false;
     const setShow = () =>{
         if (modify == false){
@@ -42,15 +43,15 @@ export default function Research({ auth, researches,category, categories, user})
         }
     };
     
-    
+    // CategoryList
     let categoryList = [];
     const addCategory = categories.map((item) => (
             categoryList.push(item.category)
         ));
-        
     const [value, setValue] = useState(categoryList[researches.category_id-1]);
     const [inputValue, setInputValue] = useState('');
     
+    //Getting input values
     const sCategory = (newInputValue) =>{
         const categoryId = categories.filter((category) => category.category == newInputValue);
         setData('category_id', categoryId[0].id);
@@ -65,6 +66,7 @@ export default function Research({ auth, researches,category, categories, user})
         setData('link', e.target.value);
     });
     
+    //post
     const submit = (e) => {
         e.preventDefault();
         post('/updateresearch/'+researches.id);
@@ -74,6 +76,7 @@ export default function Research({ auth, researches,category, categories, user})
         <>
             <Header auth={auth}>Content</Header>
             
+            {/* Record Modify Screen */}
             <div id='modify' className='hidden w-4/5 mx-auto my-10'>
                 <Autocomplete
                   value={value}
@@ -107,7 +110,7 @@ export default function Research({ auth, researches,category, categories, user})
                 >SAVE</Button>
             </div>
             
-            
+            {/* Show Record Contents */}
             <div id='result' className='w-4/5 mx-auto my-10'>
                 <h1 className="text-xl font-bold mt-6">Title</h1>
                 <p>{researches.title}</p>
